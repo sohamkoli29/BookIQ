@@ -1,0 +1,24 @@
+# Django core
+django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+python-dotenv==1.0.0
+
+# Database
+mysqlclient==2.2.0
+
+# Scraping
+selenium==4.15.2
+beautifulsoup4==4.12.2
+requests==2.31.0
+
+# AI / LLM
+openai==1.12.0         # Used for LM Studio (OpenAI-compatible API)
+anthropic==0.18.0      # Keep for fallback, optional
+
+# Embeddings & Vector DB
+chromadb==0.4.22
+sentence-transformers==2.3.1
+
+# Utils
+tqdm==4.66.1
