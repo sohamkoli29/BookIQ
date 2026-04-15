@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #F5EFE0;
+  --cream-dark: #EDE4CF;
+  --cream-darker: #E2D5BC;
+  --wood-light: #C9A96E;
+  --wood: #A0784A;
+  --wood-dark: #7A5830;
+  --mahogany: #5C3A1E;
+  --ink: #2C1A0E;
+  --ink-light: #4A3020;
+  --paper: #FAF6EE;
+  --spine-red: #8B2020;
+  --spine-blue: #1A3A5C;
+  --spine-green: #1C4A2A;
+  --spine-gold: #8B6914;
+  --text-primary: #2C1A0E;
+  --text-secondary: #6B4C2A;
+  --text-muted: #9B7D5A;
+  --border: rgba(160, 120, 74, 0.25);
+  --border-strong: rgba(160, 120, 74, 0.5);
+  --shadow: 0 4px 24px rgba(92, 58, 30, 0.12);
+  --shadow-hover: 0 8px 32px rgba(92, 58, 30, 0.2);
+  --bg-card: #FEFAF2;
+  --bg-surface: #F5EFE0;
+  --bg-page: #EDE4CF;
+  --accent: #8B2020;
+  --accent-hover: #6B1818;
+  --lamp-glow: rgba(255, 200, 80, 0.15);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Lora', Georgia, serif;
+  --font-ui: 'DM Sans', system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
+  --cream: #1A1008;
+  --cream-dark: #221508;
+  --cream-darker: #2A1C0E;
+  --wood-light: #6B4A28;
+  --wood: #8B6438;
+  --wood-dark: #A07840;
+  --mahogany: #C09860;
+  --ink: #F0E6D0;
+  --ink-light: #D4C4A0;
+  --paper: #241808;
+  --text-primary: #F0E6D0;
+  --text-secondary: #C4A878;
+  --text-muted: #8B7054;
+  --border: rgba(180, 140, 80, 0.2);
+  --border-strong: rgba(180, 140, 80, 0.4);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --bg-card: #1E1408;
+  --bg-surface: #1A1008;
+  --bg-page: #120C04;
+  --accent: #D4A050;
+  --accent-hover: #E8B860;
+  --lamp-glow: rgba(255, 200, 80, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* Bookshelf wood grain texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(160, 120, 74, 0.03) 3px,
+      rgba(160, 120, 74, 0.03) 6px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Lamp glow effect when on */
+body.lamp-on::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(ellipse at top right, var(--lamp-glow), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-page); }
+::-webkit-scrollbar-thumb { background: var(--wood); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--wood-dark); }
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--cream);
+}
+
+/* Smooth transitions on theme change */
+*, *::before, *::after {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Override for elements that shouldn't transition */
+.no-transition, .no-transition * {
+  transition: none !important;
+}
+
+/* Book spine colors for visual variety */
+.spine-1 { background: var(--spine-red); }
+.spine-2 { background: var(--spine-blue); }
+.spine-3 { background: var(--spine-green); }
+.spine-4 { background: var(--spine-gold); }
+.spine-5 { background: var(--mahogany); }
+
+/* Lamp string animation */
+@keyframes pull-string {
+  0% { transform: scaleY(1); }
+  30% { transform: scaleY(1.15); }
+  60% { transform: scaleY(0.95); }
+  80% { transform: scaleY(1.05); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes lamp-swing {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(3deg); }
+  35% { transform: rotate(-2deg); }
+  55% { transform: rotate(1deg); }
+  75% { transform: rotate(-0.5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.lamp-pulling .lamp-string {
+  animation: pull-string 0.5s ease;
+}
+
+.lamp-pulling .lamp-body {
+  animation: lamp-swing 0.8s ease;
+}
+
+/* Page transitions */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+/* Stagger for cards */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.10s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.20s; }
